@@ -17,4 +17,9 @@ db.test_tb.insertMany([
         "name": "name3",
         "type": "type3"
     },
+     {
+        "id": 4,
+        "name": "name4",
+        "type": "type4"
+    },
 ]);
