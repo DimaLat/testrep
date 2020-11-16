@@ -1,0 +1,9 @@
+# Byte-compiled files
+__pycache__/
+*.pyc
+
+# Venv files
+venv/
+
+# idea
+.idea/
