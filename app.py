@@ -1,7 +1,12 @@
 from flask import Flask, jsonify
+from flask_celery import make_celery
 from pymongo import MongoClient
 
 app = Flask(__name__)
+app.config['CELERY_BROKER_URL'] = 'mongodb://localhost:27017/celerypract'
+app.config['CELERY_BACKEND'] = 'db+sqlite:///db.sqlite3'
+
+celery = make_celery(app)
 
 
 def get_db():
@@ -12,6 +17,19 @@ def get_db():
                          authSource="admin")
     db = client["test_db"]
     return db
+
+
+@app.route('/process/<name>')
+def process(name):
+
+    reverse.delay(name)
+
+    return "I sent an async request"
+
+
+@celery.task(name='app.reverse')
+def reverse(string):
+    return string[::-1]
 
 
 @app.route('/')
@@ -28,4 +46,4 @@ def get_test():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000,debug=True)
