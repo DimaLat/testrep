@@ -30,7 +30,7 @@ services:
       build:
         context: ./
       command: rm worker.pid
-      command: celery -A tasks worker -l info --pidfile=worker.pid
+      command: celery -A app.celery worker --loglevel=info
       depends_on:
         - redis
   flower:
