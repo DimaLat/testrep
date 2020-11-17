@@ -7,3 +7,6 @@ venv/
 
 # idea
 .idea/
+
+# sqlite db
+*.sqlite3
